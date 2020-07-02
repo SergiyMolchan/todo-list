@@ -1,14 +1,22 @@
-import express = require('express');
+import {Request, Response} from "express";
+import express from 'express';
+import dbQuery from './database';
+import todoRoutes from './routes/todo';
+import config from './utils/config';
+const {port} = config;
+
 // Create a new express app instance
 const app: express.Application = express();
-app.get('/', function (req, res) {
-res.send('Hello World!');
+
+app.use('/api/todo', todoRoutes);
+
+app.get('/', function (req: Request, res: Response) {
+  res.send('Hello World!');
 });
 
-app.get('/test', function (req, res) {
-  res.json({status: 'tests ok'});
-});
+app.listen(port, function () {
+  const result = dbQuery('CREATE DATABASE IF NOT EXISTS todolist');
+  console.log(result);
 
-app.listen(4000, function () {
-console.log('App is listening on port 4000!');
+  console.log(`App is listening on port ${port}.`);
 });
