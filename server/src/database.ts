@@ -22,7 +22,7 @@ export const dbQuery = (query: Query | string, callback: Function, errorHandler:
   }).then(results => callback(results)).catch(error => errorHandler(error));
 };
 
-// check if the table exists
+// check table if not exists create table
 export const checkTables = (tableName: string, callback: Function): void => {
   const sql: Query | string = `SHOW TABLES FROM ${db_name} LIKE ${tableName}`;
   dbQuery(sql, (result: any) => {

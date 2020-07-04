@@ -1,6 +1,6 @@
 import {Router} from "express";
 import express = require('express');
-import {get, create, update, remove} from '../controllers/todo';
+import todoController from '../controllers/todoController';
 
 const router = Router();
 
@@ -8,15 +8,15 @@ router.use(express.json());
 router.use(express.urlencoded({extended: false}));
 
 //get list tasks
-router.get('/', get);
+router.get('/', todoController.get);
 
 // create new task
-router.post('/', create);
+router.post('/', todoController.create);
 
 // update task
-router.put('/:id', update);
+router.put('/', todoController.update);
 
 // delete task
-router.delete('/:id', remove);
+router.delete('/', todoController.remove);
 
 export default router;
