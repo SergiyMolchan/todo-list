@@ -3,7 +3,8 @@ const config = {
   db_host: process.env.DB_HOST || "localhost",
   db_user: process.env.DB_USER || "root",
   db_password: process.env.DB_PASSWORD || "password",
-  db_name: 'todolist'
+  db_name: 'todolist',
+  jwt: 'secret'
 };
 
 export default config;

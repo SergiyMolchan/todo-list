@@ -23,10 +23,25 @@ export const checkTableOfUsers = () => checkTables(tableName, createTable);
 // get user
 export const getUser = (queryParams: InterfaceUser) => {
   const {login} = queryParams; // id of owner
-  const sql: Query | string = `SELECT * FROM ${tableName} WHERE login = ${login}`;
+  const sql: Query | string = `SELECT * FROM ${tableName} WHERE login = '${login}'`;
   return new Promise((resolve, rejects) => {
-    dbQuery(sql, (result: InterfaceTodo[]) => {
-      resolve(result);
+    dbQuery(sql, (result: any) => {
+      const user: InterfaceUser = result[0];
+      resolve(user);
+    }, () => {
+      resolve(undefined);
+    });
+  });
+};
+
+// get user by id
+export const getUserById = (queryParams: any) => {
+  const {id} = queryParams; // id of owner
+  const sql: Query | string = `SELECT * FROM ${tableName} WHERE id = ${id}`;
+  return new Promise((resolve, rejects) => {
+    dbQuery(sql, (result: any) => {
+      const user: InterfaceUser = result[0];
+      resolve({id: user.id, login: user.login, password: user.password});
     }, () => {
       resolve(undefined);
     });

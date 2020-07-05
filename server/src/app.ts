@@ -1,5 +1,7 @@
 import {Request, Response} from "express";
 import express from 'express';
+import passport from 'passport';
+import passportJwt from './middleware/passport';
 import {dbQuery} from './database';
 import todoRoutes from './routes/todoRoutes';
 import userRoutes from './routes/userRoutes';
@@ -13,8 +15,15 @@ const {port} = config;
 // Create a new express app instance
 const app: express.Application = express();
 
+// passport js for auth
+app.use(passport.initialize());
+passportJwt(passport);
+
+// api for requests
 app.use('/api/auth', userRoutes);
 app.use('/api/todo', todoRoutes);
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
 app.get('/', function (req: Request, res: Response) {
   res.send('Hello World!');
