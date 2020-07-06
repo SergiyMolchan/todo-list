@@ -1,7 +1,6 @@
 import {Request, Response} from 'express';
 import {getTodo, createTodo, updateTodo, removeTodo} from '../models/todoModel'
 import InterfaceTodo from "../interfaces/interfaceTodo";
-import InterfaceUser from "../interfaces/interfaceUser";
 
 class todoController {
 
@@ -11,7 +10,7 @@ class todoController {
       // @ts-ignore
       const owner = req.user.id;
       const todoList = await getTodo({owner});
-      res.status(200).json({succes: true, todoList: todoList});
+      res.status(200).json({succes: true, todoList});
     } catch (error) {
       res.status(404).json({error: error.message});
     }
@@ -33,7 +32,7 @@ class todoController {
       const todoList = await createTodo(newTodo).then(async () => {
         return await getTodo({owner});
       });
-      res.status(200).json({succes: true, todoList: todoList});
+      res.status(200).json({succes: true, todoList});
     } catch (error) {
       res.status(404).json({error: error.message});
     }
@@ -55,7 +54,7 @@ class todoController {
       const todoList = await updateTodo(updatedTodo).then(async () => {
         return await getTodo({owner});
       });
-      res.status(200).json({succes: true, todoList: todoList});
+      res.status(200).json({succes: true, todoList});
     } catch (error) {
       res.status(404).json({error: error.message});
     }
@@ -67,10 +66,10 @@ class todoController {
       // @ts-ignore
       const owner = req.user.id;
       const {id} = req.body;
-      const todoList = await removeTodo({id: id}).then(async () => {
+      const todoList = await removeTodo({id}).then(async () => {
         return await getTodo({owner});
       });
-      res.status(200).json({succes: true, todoList: todoList});
+      res.status(200).json({succes: true, todoList});
     } catch (error) {
       res.status(404).json({error: error.message});
     }

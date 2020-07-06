@@ -5,10 +5,12 @@ import passportJwt from './middleware/passport';
 import {dbQuery} from './database';
 import todoRoutes from './routes/todoRoutes';
 import userRoutes from './routes/userRoutes';
+import categoryRoutes from './routes/categoryRoutes';
 import config from './utils/config';
 import {MysqlError, Query} from "mysql";
 import {checkTableOfTodo} from "./models/todoModel";
 import {checkTableOfUsers} from "./models/userModel";
+import {checkTableOfCategory} from "./models/categoryModel";
 
 const {port} = config;
 
@@ -22,6 +24,7 @@ passportJwt(passport);
 // api for requests
 app.use('/api/auth', userRoutes);
 app.use('/api/todo', todoRoutes);
+app.use('/api/category', categoryRoutes);
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
@@ -36,6 +39,7 @@ app.listen(port, function () {
     dbQuery(query, () => {
       console.log('Data base is work.');
       // check tables if not identified create tables to database
+      checkTableOfCategory();
       checkTableOfTodo();
       checkTableOfUsers();
     }, (error: MysqlError) => {
