@@ -46,11 +46,15 @@ export const createCategory = (queryParams: InterfaceCategory) => {
 
 // delete category
 export const removeCategory = (queryParams: any) => {
-  const {id} = queryParams; // id of task
+  const {id, owner, title} = queryParams; // id of task
   const sql: Query | string = `DELETE FROM ${tableName} WHERE id = ${id}`;
   return new Promise((resolve, rejects) => {
     dbQuery(sql, (result: InterfaceCategory[]) => {
-      resolve(result);
+      // remove tasks of category from removed category
+      const sql = `DELETE FROM todo WHERE owner = ${owner} AND category = '${title}'`;
+      dbQuery(sql, () => {
+        resolve({result});
+      }, (error: MysqlError) => {rejects(error)});
     }, (error: MysqlError) => {
       rejects(error);
     });
