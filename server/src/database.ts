@@ -31,10 +31,3 @@ export const checkTables = (tableName: string, callback: Function): void => {
     callback();
   });
 };
-
-// close pool
-// pool.end(function(err: MysqlError | undefined) {
-//     if (err) console.log('Error: ' + err.message);
-//     console.log('pool closed.');
-// });
-

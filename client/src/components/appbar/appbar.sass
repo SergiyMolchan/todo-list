@@ -1,0 +1,75 @@
+@import '../../variables'
+
+.navBar
+  position: relative
+  display: flex
+  flex-wrap: nowrap
+  justify-content: space-between
+  align-items: center
+  box-sizing: border-box
+  flex-shrink: 0
+  width: 100%
+  margin: 0
+  padding: 10px 20px
+  border: none
+  z-index: 3
+  background: $primaryColor
+  color: $buttonTextColor
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12)
+  transition-duration: .2s
+  transition-timing-function: cubic-bezier(.4,0,.2,1)
+  transition-property: max-height,box-shadow
+
+.navList
+  ul
+    display: flex
+    list-style: none
+    align-items: center
+    margin: 0
+  &_item
+    cursor: pointer
+    font-size: 24px
+    a
+      transition: 0.25s
+      color: $buttonTextColor
+      text-decoration: none
+      margin: 0
+      padding: 5px 10px
+    &:hover
+      a
+        border-radius: 5px
+        background: rgba(255, 255, 255, 0.05)
+    &-active
+      border-radius: 5px
+      background: rgba(255, 255, 255, 0.1)
+
+.appMenu
+  position: absolute
+  right: 20px
+  top: 10px
+
+@media screen and (max-width: $screenMedium)
+  .title
+    font-size: 30px
+
+  .navList
+    &_item
+      font-size: 20px
+
+@media screen and (max-width: $screenSmall)
+  .title
+    font-size: 26px
+  .navList
+    &_item
+      font-size: 18px
+
+@media screen and (max-width: $screenExtraSmall)
+  .navBar
+    padding: 5px 10px
+
+  .title
+    font-size: 20px
+
+  .navList
+    &_item
+      font-size: 16px

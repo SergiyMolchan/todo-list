@@ -1,8 +1,6 @@
 import {Request, Response} from 'express';
 import {getCategory, createCategory, removeCategory} from '../models/categoryModel';
 import InterfaceCategory from "../interfaces/interfaceCategory";
-import {dbQuery} from "../database";
-import {MysqlError} from "mysql";
 
 class categoryController {
 
@@ -41,7 +39,7 @@ class categoryController {
       const owner = req.user.id;
       const {id, title} = req.body;
       const categoryList = await removeCategory({id, owner, title}).then(async () => {
-          return await getCategory({owner});
+        return await getCategory({owner});
       });
       res.status(200).json({succes: true, categoryList});
     } catch (error) {

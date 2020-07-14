@@ -1,0 +1,22 @@
+@import "../../variables"
+
+.card
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1)
+  padding: 16px
+  border-radius: 4px
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12)
+  &_title
+    font-family: $secondaryFont
+    font-weight: 500
+    color: $primaryTextColor
+    font-size: 24px
+    margin-bottom: 10px
+    text-align: center
+  &_subtitle
+    text-align: center
+    margin: 0 0 10px 0
+    font-family: $primaryFont
+    color: $secondaryTextColor
+    font-size: 14px
+  &-position
+    @include cardPosition()

@@ -54,7 +54,9 @@ export const removeCategory = (queryParams: any) => {
       const sql = `DELETE FROM todo WHERE owner = ${owner} AND category = '${title}'`;
       dbQuery(sql, () => {
         resolve({result});
-      }, (error: MysqlError) => {rejects(error)});
+      }, (error: MysqlError) => {
+        rejects(error)
+      });
     }, (error: MysqlError) => {
       rejects(error);
     });
